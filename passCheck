@@ -1,5 +1,4 @@
 #!/bin/bash
-cd /Users/adam/IdeaProjects/Final\ Project/src/
 echo "Compiling"
 javac *.java
 echo "Running password checker..."
