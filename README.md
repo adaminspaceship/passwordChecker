@@ -1,8 +1,8 @@
 # Password Checker
 
-I wrote this program to verify secure passwords.
+I wrote this program to check password strength.
 
-Usage:
+#Usage:
 
 ```bash
 ./passCheck
