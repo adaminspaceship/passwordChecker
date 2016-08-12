@@ -1,6 +1,6 @@
 # Password Checker
 
-I wrote this program to check password strength.
+I wrote this program to check password strength..
 
 #Usage:
 

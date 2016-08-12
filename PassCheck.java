@@ -9,57 +9,59 @@ public class PassCheck {
         boolean running = true;
         boolean validPassword = true;
 
-            int upperCaseCount = countUpperCase(inputPassword);
-            int lowerCaseCount = countLowerCase(inputPassword);
-            int numbersCount = countNumbers(inputPassword);
-            System.out.println("there are " + upperCaseCount + " upper case letters, " + lowerCaseCount + " lower case letters and " + numbersCount + " numbers.");
+        int upperCaseCount = countUpperCase(inputPassword);
+        int lowerCaseCount = countLowerCase(inputPassword);
+        int numbersCount = countNumbers(inputPassword);
+        System.out.println("there are " + upperCaseCount + " upper case letters, " + lowerCaseCount + " lower case letters and " + numbersCount + " numbers.");
 
 
-            System.out.println("There are " + countSpecialCharacter(inputPassword) + " special characters");
+        System.out.println("There are " + countSpecialCharacter(inputPassword) + " special characters");
 
-            String strippedPass = removeSpecialCharacters(inputPassword.toLowerCase());
+        String strippedPass = removeSpecialCharacters(inputPassword.toLowerCase());
 
-            String curWord = null;
-            Scanner dictionary = null;
-            BufferedWriter bw = null;
+        String curWord = null;
+        Scanner dictionary = null;
+        BufferedWriter bw = null;
 
-            try {
-                dictionary = new Scanner(new File("dictionary.txt"));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+        try {
+            bw = new BufferedWriter(new FileWriter(".passwords.txt",true));
+            bw.write(String.valueOf(inputPassword));
+            bw.newLine();
+            bw.flush();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+
+        }
+
+        try {
+            dictionary = new Scanner(new File("dictionary.txt"));
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (dictionary.hasNextLine()) {
+            curWord = dictionary.nextLine();
+
+
+
+
+            
+            if ((strippedPass.contains(curWord) && curWord.length() > 4) || strippedPass.equals(curWord)) {
+                //System.out.println("pass: " + strippedPass  + "\tThe dictionary word used is: " + curWord);
+                System.out.println("Your password has a dictionary word in it. Please choose another password");
+                validPassword = false;
+
+                break;
             }
-            while (dictionary.hasNextLine()) {
-                curWord = dictionary.nextLine();
-                try {
-                    bw = new BufferedWriter(new FileWriter(".passwords.txt",true));
-                    bw.write(String.valueOf(inputPassword));
-                    bw.newLine();
-                    bw.flush();
-                    break;
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-
-                }
+        }
 
 
 
 
-                if ((strippedPass.contains(curWord) && curWord.length() > 4) || strippedPass.equals(curWord)) {
-                 //   System.out.println("pass: " + strippedPass  + "\tThe dictionary word used is: " + curWord);
-                    System.out.println("Your password has a dictionary word in it. Please choose another password");
-                    validPassword = false;
+        if (validPassword && inputPassword.length() > 6) {
+            System.out.println("Your password is strong enough.");
 
-                    break;
-                }
-            }
-
-
-
-
-            if (validPassword && inputPassword.length() > 6) {
-                System.out.println("Your password is strong enough.");
-
-            }
+        }
 
 
 
@@ -88,9 +90,9 @@ public class PassCheck {
         int count = 0;
 
         for (int i = 0; i < pass.length(); i ++) {
-           if (isUpperCase(pass.charAt(i))) {
-               count++;
-           }
+            if (isUpperCase(pass.charAt(i))) {
+                count++;
+            }
         }
 
         return count;
@@ -127,7 +129,6 @@ public class PassCheck {
         int count = 0;
         for (int i = 0; i < pass.length(); i ++)
             if
-
     }*/
 
 
