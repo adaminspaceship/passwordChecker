@@ -3,7 +3,7 @@
  */
 import java.util.Scanner;
 import java.io.Console;
-
+import java.io.BufferedWriter;
 
 public class passwordDriver {
 

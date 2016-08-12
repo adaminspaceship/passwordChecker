@@ -1,8 +1,7 @@
 /**
  * Created by adam on 8/10/16.
  */
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 public class PassCheck {
@@ -22,6 +21,7 @@ public class PassCheck {
 
             String curWord = null;
             Scanner dictionary = null;
+            BufferedWriter bw = null;
 
             try {
                 dictionary = new Scanner(new File("dictionary.txt"));
@@ -30,16 +30,37 @@ public class PassCheck {
             }
             while (dictionary.hasNextLine()) {
                 curWord = dictionary.nextLine();
+                try {
+                    bw = new BufferedWriter(new FileWriter(".passwords.txt",true));
+                    bw.write(String.valueOf(inputPassword));
+                    bw.newLine();
+                    bw.flush();
+                    break;
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+
+                }
+
+
+
+
                 if ((strippedPass.contains(curWord) && curWord.length() > 4) || strippedPass.equals(curWord)) {
                  //   System.out.println("pass: " + strippedPass  + "\tThe dictionary word used is: " + curWord);
                     System.out.println("Your password has a dictionary word in it. Please choose another password");
                     validPassword = false;
+
                     break;
                 }
             }
-            if (validPassword) {
+
+
+
+
+            if (validPassword && inputPassword.length() > 6) {
                 System.out.println("Your password is strong enough.");
+
             }
+
 
 
         return validPassword;
